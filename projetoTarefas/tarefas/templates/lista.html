@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Tarefas</title>
+</head>
+<body>
+    <h1>A Minha Lista de Tarefas</h1>
+    
+    <!-- Link para criar nova tarefa (vamos configurá-lo no próximo passo) -->
+    <a href="{% url 'nova_tarefa' %}">+ Cadastrar Nova Tarefa</a>
+    
+    <hr>
+    
+    <ul>
+        {% for tarefa in tarefas %}
+            <li>
+                <strong>{{ tarefa.titulo }}</strong> 
+                | Prioridade: {{ tarefa.prioridade }} 
+                | Status: {% if tarefa.concluida %}Concluída{% else %}Pendente{% endif %}
+                
+                <br>
+                <!-- Links para as outras páginas (vamos preenchê-los mais à frente) -->
+                <a href="{% url 'detalhe_tarefa' tarefa.pk %}">Detalhes</a> 
+                <a href="{% url 'editar_tarefa' tarefa.pk %}">Editar</a> 
+                <a href="{% url 'excluir_tarefa' tarefa.pk %}">Excluir</a>
+            </li>
+        {% empty %}
+            <li>Nenhuma tarefa encontrada.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
